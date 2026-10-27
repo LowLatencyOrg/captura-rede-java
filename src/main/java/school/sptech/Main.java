@@ -37,22 +37,22 @@ public class Main {
             long recebidosAgora = recebidoAtual - recebidoAntes;
             long enviadosAgora = enviadoAtual - enviadoAntes;
 
-            Double mbRecebidos = recebidosAgora / (1024.0 * 1024.0);
-            Double mbEnviados = enviadosAgora / (1024.0 * 1024.0);
+            Double mbRecebidos = recebidosAgora / (1024.0);
+            Double mbEnviados = enviadosAgora / (1024.0);
 
-            System.out.println(String.format("Recebido: %.2f MB", mbRecebidos));
-            System.out.println(String.format("Enviado: %.2f MB", mbEnviados));
+            System.out.println(String.format("Recebido: %.2f KB", mbRecebidos));
+            System.out.println(String.format("Enviado: %.2f KB", mbEnviados));
             System.out.println("-----");
 
-            if (mbRecebidos > 50.0) {
+            if (mbRecebidos > (50.0 * 1024.0)) {
                 alertaRecebido = 3;
-            } else if (mbRecebidos > 20.0) {
+            } else if (mbRecebidos > (20.0 * 1024.0)) {
                 alertaRecebido = 2;
             }
 
-            if (mbEnviados > 50.0) {
+            if (mbEnviados > (50.0 * 1024.0)) {
                 alertaEnviado = 3;
-            } else if (mbEnviados > 20.0) {
+            } else if (mbEnviados > (20.0 * 1024.0)) {
                 alertaEnviado = 2;
             }
 
