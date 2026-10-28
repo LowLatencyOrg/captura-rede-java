@@ -37,32 +37,32 @@ public class Main {
             long recebidosAgora = recebidoAtual - recebidoAntes;
             long enviadosAgora = enviadoAtual - enviadoAntes;
 
-            Double mbRecebidos = recebidosAgora / (1024.0);
-            Double mbEnviados = enviadosAgora / (1024.0);
+            Double kbRecebidos = recebidosAgora / (1024.0);
+            Double kbEnviados = enviadosAgora / (1024.0);
 
-            System.out.println(String.format("Recebido: %.2f KB", mbRecebidos));
-            System.out.println(String.format("Enviado: %.2f KB", mbEnviados));
+            System.out.println(String.format("Recebido: %.2f KB", kbRecebidos));
+            System.out.println(String.format("Enviado: %.2f KB", kbEnviados));
             System.out.println("-----");
 
-            if (mbRecebidos > (50.0 * 1024.0)) {
+            if (kbRecebidos > (50.0 * 1024.0)) {
                 alertaRecebido = 3;
-            } else if (mbRecebidos > (20.0 * 1024.0)) {
+            } else if (kbRecebidos > (20.0 * 1024.0)) {
                 alertaRecebido = 2;
             }
 
-            if (mbEnviados > (50.0 * 1024.0)) {
+            if (kbEnviados > (50.0 * 1024.0)) {
                 alertaEnviado = 3;
-            } else if (mbEnviados > (20.0 * 1024.0)) {
+            } else if (kbEnviados > (20.0 * 1024.0)) {
                 alertaEnviado = 2;
             }
 
             LocalDateTime diaHora = LocalDateTime.now();
             if (i % 2 == 0) {
-                dao.salvarCaptura(new Captura(1, 4, 3, mbRecebidos, alertaRecebido, 3), diaHora);
-                dao.salvarCaptura(new Captura(1, 4, 4, mbEnviados, alertaEnviado, 3), diaHora);
+                dao.salvarCaptura(new Captura(1, 4, 7, kbRecebidos, alertaRecebido, 3), diaHora);
+                dao.salvarCaptura(new Captura(1, 4, 6, kbEnviados, alertaEnviado, 3), diaHora);
             } else {
-                dao.salvarCaptura(new Captura(2, 4, 3, mbRecebidos, alertaRecebido, 3), diaHora);
-                dao.salvarCaptura(new Captura(1, 4, 4, mbEnviados, alertaEnviado, 3), diaHora);
+                dao.salvarCaptura(new Captura(2, 4, 7, kbRecebidos, alertaRecebido, 3), diaHora);
+                dao.salvarCaptura(new Captura(1, 4, 6, kbEnviados, alertaEnviado, 3), diaHora);
             }
 
             recebidoAntes = recebidoAtual;

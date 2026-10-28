@@ -10,7 +10,7 @@ public class ConexaoBanco {
 
     public ConexaoBanco() {
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl("jdbc:mysql://localhost:3306/lowLatency?serverTimezone=America/Sao_Paulo");
+        basicDataSource.setUrl("jdbc:mysql://32.193.133.176:3306/lowLatency");
         basicDataSource.setUsername("client_java");
         basicDataSource.setPassword("Sptech#2026");
 
