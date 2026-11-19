@@ -20,4 +20,9 @@ public class CapturaDao {
             jdbcTemplate.update(sql, captura.getFkServidor(), captura.getFkComponente(), captura.getFkMetrica(), captura.getValor(), captura.getFkUnidadeMedida(), captura.getFkAlerta(), diaHora);
         }
     }
+
+    public void salvarAlertaSlack(String titulo, String conteudo, String canal, int fkEmpresa) {
+        String sql = "INSERT INTO slack (titulo, conteudo, canal, fk_empresa) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, titulo, conteudo, canal, fkEmpresa);
+    }
 }

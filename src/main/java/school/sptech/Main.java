@@ -11,6 +11,7 @@ public class Main {
         Looca looca = new Looca();
         ConexaoBanco cnx = new ConexaoBanco();
         CapturaDao dao = new CapturaDao(cnx.getTemplate());
+        SlackNotifier slackNotifier = new SlackNotifier("#nome-do-seu-canal");
 
         int i = 1;
         long recebidoAntes = 0;
@@ -57,12 +58,18 @@ public class Main {
             }
 
             LocalDateTime diaHora = LocalDateTime.now();
-            if (i % 2 == 0) {
-                dao.salvarCaptura(new Captura(1, 4, 7, kbRecebidos, alertaRecebido, 3), diaHora);
-                dao.salvarCaptura(new Captura(1, 4, 6, kbEnviados, alertaEnviado, 3), diaHora);
-            } else {
-                dao.salvarCaptura(new Captura(2, 4, 7, kbRecebidos, alertaRecebido, 3), diaHora);
-                dao.salvarCaptura(new Captura(1, 4, 6, kbEnviados, alertaEnviado, 3), diaHora);
+            int servidorRecebido = (i % 2 == 0) ? 1 : 2;
+            int servidorEnviado = 1;
+
+            dao.salvarCaptura(new Captura(servidorRecebido, 4, 7, kbRecebidos, alertaRecebido, 3), diaHora);
+            dao.salvarCaptura(new Captura(servidorEnviado, 4, 6, kbEnviados, alertaEnviado, 3), diaHora);
+
+            if (alertaRecebido == 2 || alertaRecebido == 3) {
+                slackNotifier.notificarAlerta(dao, 1, servidorRecebido, 7, kbRecebidos, alertaRecebido, diaHora);
+            }
+
+            if (alertaEnviado == 2 || alertaEnviado == 3) {
+                slackNotifier.notificarAlerta(dao, 1, servidorEnviado, 6, kbEnviados, alertaEnviado, diaHora);
             }
 
             recebidoAntes = recebidoAtual;
