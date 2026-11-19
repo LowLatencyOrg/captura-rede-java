@@ -58,7 +58,6 @@ public class SlackNotifier {
 
         String metricaNome = (fkMetrica == 7) ? "Recebido (KB)" : "Enviado (KB)";
         String status = (nivelAlerta == 3) ? "CRITICO" : "ALERTA";
-        String icone = (nivelAlerta == 3) ? "🚨" : "⚠️";
 
         // 1. Grava na tabela slack do MySQL (respeitando VARCHAR(45))
         String tituloDb = limitar(String.format("[%s] Rede - %s", status, metricaNome), 45);
@@ -79,7 +78,6 @@ public class SlackNotifier {
         String mensagemSlack = String.format(
                 Locale.US,
                 "%s *[%s] Alerta lowLatency — Servidor #%d*\n*Componente:* Rede\n*Métrica:* %s\n*Leitura:* `%.2f KB`\n*Data/Hora:* %s",
-                icone,
                 status,
                 fkServidor,
                 metricaNome,
